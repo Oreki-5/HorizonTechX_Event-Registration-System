@@ -17,4 +17,9 @@ public class UserService {
         throw new UnsupportedOperationException("Unimplemented method 'saveUser'");
     }
 
+    public void deleteUser(int id) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'deleteUser'");
+    }
+
 }
