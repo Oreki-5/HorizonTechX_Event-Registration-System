@@ -32,23 +32,23 @@ public class Registrations {
     }
 
     @Column
-    private int event_id;
+    private int eventId;
     @Column
-    private int user_id;
+    private int userId;
 
-    public int getEvent_id() {
-        return event_id;
+    public int getEventId() {
+        return eventId;
     }
 
-    public void setEvent_id(int event_id) {
-        this.event_id = event_id;
+    public void setEventId(int event_id) {
+        this.eventId = event_id;
     }
 
-    public int getUser_id() {
-        return user_id;
+    public int getUserId() {
+        return userId;
     }
 
-    public void setUser_id(int user_id) {
-        this.user_id = user_id;
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 }

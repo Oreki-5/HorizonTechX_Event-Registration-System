@@ -32,12 +32,12 @@ public class Users {
 
     @Column
     @OneToMany(fetch = FetchType.EAGER)
-    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    @JoinColumn(name = "userId", referencedColumnName = "id")
     private Set<Registrations> registrations;
 
     @Column
     @OneToMany(fetch = FetchType.EAGER)
-    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    @JoinColumn(name = "userId", referencedColumnName = "id")
     private Set<Events> events;
 
     public int getId() {

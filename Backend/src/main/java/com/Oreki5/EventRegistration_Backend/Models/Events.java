@@ -31,7 +31,7 @@ public class Events {
 
     @Column
     @OneToMany(fetch = FetchType.EAGER)
-    @JoinColumn(name = "event_id", referencedColumnName = "id")
+    @JoinColumn(name = "eventId", referencedColumnName = "id")
     private Set<Registrations> registrations;
 
     public int getId() {

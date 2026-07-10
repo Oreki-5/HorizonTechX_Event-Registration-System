@@ -8,6 +8,7 @@ public class EventRegistrationBackendApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(EventRegistrationBackendApplication.class, args);
+		System.out.println("Server is running");
 	}
 
 }
