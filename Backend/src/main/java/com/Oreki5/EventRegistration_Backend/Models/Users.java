@@ -27,18 +27,18 @@ public class Users {
     private String password;
 
     @Column
-    @ColumnDefault("ROLE_USER")
-    private String role;
+    // @ColumnDefault("ROLE_USER")
+    private String role="ROLE_USER";
 
-    @Column
     @OneToMany(fetch = FetchType.EAGER)
     @JoinColumn(name = "userId", referencedColumnName = "id")
     private Set<Registrations> registrations;
 
-    @Column
     @OneToMany(fetch = FetchType.EAGER)
     @JoinColumn(name = "userId", referencedColumnName = "id")
     private Set<Events> events;
+
+    // Getters and Setters
 
     public int getId() {
         return id;
@@ -48,12 +48,18 @@ public class Users {
         this.id = id;
     }
 
-    public String getName() {
+    /*
+     * Learnt something here. The getters and setters need to have correct naming
+     * system. otherwise Repo interfaces wont map values to that column and set the
+     * attribute value to null
+     */
+
+    public String getUsername() {
         return username;
     }
 
-    public void setName(String name) {
-        this.username = name;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public Set<Registrations> getRegistrations() {

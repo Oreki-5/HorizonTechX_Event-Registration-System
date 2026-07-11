@@ -2,6 +2,7 @@ package com.Oreki5.EventRegistration_Backend.Models;
 
 import java.util.Set;
 
+import org.hibernate.annotations.ColumnDefault;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -25,14 +26,19 @@ public class Events {
     private String description;
 
     @Column
+    @ColumnDefault("active")
     private String status;
 
 
-
+    @Column
+    private int userId;
+    
     @Column
     @OneToMany(fetch = FetchType.EAGER)
     @JoinColumn(name = "eventId", referencedColumnName = "id")
     private Set<Registrations> registrations;
+
+    
 
     public int getId() {
         return id;
@@ -74,4 +80,12 @@ public class Events {
         this.status = status;
     }
 
+
+    public int getUserId(){
+        return userId;
+    }
+
+    public void setUserId(int userId){
+        this.userId = userId;
+    }
 }

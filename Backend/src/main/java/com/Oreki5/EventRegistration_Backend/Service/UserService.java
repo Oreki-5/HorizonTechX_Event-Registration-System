@@ -1,25 +1,34 @@
 package com.Oreki5.EventRegistration_Backend.Service;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.Oreki5.EventRegistration_Backend.Models.Users;
+import com.Oreki5.EventRegistration_Backend.Repo.UsersRepo;
+import java.util.List;
 
 @Service
 public class UserService {
 
+    @Autowired
+    private UsersRepo usersRepo;
+
     public void verifyUser(Users user) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'verifyUser'");
+        // jwt logic goes here
     }
 
+    // Need to add duplicate username validation 
     public void saveUser(Users user) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'saveUser'");
+        usersRepo.saveAndFlush(user);
     }
 
     public void deleteUser(int id) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'deleteUser'");
+        usersRepo.deleteById(id);
+    }
+
+    // test service
+    public List<Users> getAll(){
+        return usersRepo.findAll();
     }
 
 }

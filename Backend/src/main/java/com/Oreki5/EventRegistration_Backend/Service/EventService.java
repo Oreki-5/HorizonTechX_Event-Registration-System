@@ -1,6 +1,7 @@
 package com.Oreki5.EventRegistration_Backend.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -8,8 +9,6 @@ import org.springframework.stereotype.Service;
 import com.Oreki5.EventRegistration_Backend.Models.Events;
 import com.Oreki5.EventRegistration_Backend.Models.EventsResponse;
 import com.Oreki5.EventRegistration_Backend.Repo.EventsRepo;
-import com.Oreki5.EventRegistration_Backend.Repo.RegistrationsRepo;
-import com.Oreki5.EventRegistration_Backend.Repo.UsersRepo;
 
 @Service
 public class EventService {
@@ -17,34 +16,46 @@ public class EventService {
     @Autowired
     private EventsRepo eventsRepo;
 
-    @Autowired
-    private UsersRepo usersRepo;
-
-    @Autowired
-    private RegistrationsRepo registrationsRepo;
-
     public List<EventsResponse> getAllActive() {
-        return eventsRepo.findAllActive();
+        return eventsRepo.findAllByStatus("active");
     }
 
-    public void createEvent(Events event) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'createEvent'");
+    // Need to add in the design plan
+    public List<EventsResponse> getAllInactive() {
+        return eventsRepo.findAllByStatus("inactive");
     }
 
-    public List<Events> getByUser(int id) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getByUser'");
+    public boolean saveEvent(Events event) {
+        eventsRepo.saveAndFlush(event);
+        return true;
     }
 
-    public void updateEvent(Events event) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'updateEvent'");
+    public List<EventsResponse> getByUser(int id) {
+        return eventsRepo.findAllByUserId(id);
     }
 
-    public void deleteEvent(int id) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'deleteEvent'");
+    public boolean deleteEvent(int id) {
+        Optional<Events> event = eventsRepo.findById(id);
+        if (event.isPresent()) {
+            Events eventObj = event.get();
+            eventObj.setStatus("inactive");
+            eventsRepo.saveAndFlush(eventObj);
+            return true;
+        } else
+            return false;
+
+    }
+
+    public boolean restoreEvent(int id) {
+        Optional<Events> event = eventsRepo.findById(id);
+        if (event.isPresent()) {
+            Events eventObj = event.get();
+            eventObj.setStatus("active");
+            eventsRepo.saveAndFlush(eventObj);
+            return true;
+        } else
+            return false;
+
     }
 
 }

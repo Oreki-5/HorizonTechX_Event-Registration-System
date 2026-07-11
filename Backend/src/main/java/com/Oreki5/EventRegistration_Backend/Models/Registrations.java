@@ -13,7 +13,9 @@ public class Registrations {
     private int id;
 
     @Column
-    private String name;
+    private int eventId;
+    @Column
+    private int userId;
 
     public int getId() {
         return id;
@@ -22,19 +24,6 @@ public class Registrations {
     public void setId(int id) {
         this.id = id;
     }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    @Column
-    private int eventId;
-    @Column
-    private int userId;
 
     public int getEventId() {
         return eventId;

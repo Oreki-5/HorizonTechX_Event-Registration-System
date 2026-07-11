@@ -6,16 +6,18 @@ public class EventsResponse {
     private String name;
     private String description;
     private String status;
+    private int userId;
     
 
     public EventsResponse() {
     }
 
-    public EventsResponse(int id, String name, String description, String status) {
+    public EventsResponse(int id, String name, String description, String status, int userId) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.status = status;
+        this.userId = userId;
     }
 
     public int getId() {
@@ -48,5 +50,13 @@ public class EventsResponse {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 }
