@@ -7,9 +7,15 @@ public class EventsResponse {
     private String description;
     private String status;
     private int userId;
-    
 
     public EventsResponse() {
+    }
+
+    public EventsResponse(int id, String name, String description, String status) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.status = status;
     }
 
     public EventsResponse(int id, String name, String description, String status, int userId) {
