@@ -7,6 +7,8 @@ import com.Oreki5.EventRegistration_Backend.Models.Users;
 
 @Repository
 public interface UsersRepo extends JpaRepository<Users, Integer>{
+
+    Users findByUsername(String username);
     
 
 }

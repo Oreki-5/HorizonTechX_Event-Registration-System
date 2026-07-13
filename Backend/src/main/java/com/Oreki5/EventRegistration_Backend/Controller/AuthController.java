@@ -39,6 +39,7 @@ public class AuthController {
     @PostMapping("/login")
     public void verifyUser(@RequestBody Users user) {
         userService.verifyUser(user);
+        System.out.println("login req");
     }
 
     @PutMapping("/users")
