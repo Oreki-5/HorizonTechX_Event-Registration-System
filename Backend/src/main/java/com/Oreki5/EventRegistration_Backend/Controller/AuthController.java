@@ -1,6 +1,10 @@
 package com.Oreki5.EventRegistration_Backend.Controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -13,8 +17,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.Oreki5.EventRegistration_Backend.Models.Users;
 import com.Oreki5.EventRegistration_Backend.Service.UserService;
 
-import java.util.List;
-
 @RestController
 @RequestMapping("/auth")
 public class AuthController {
@@ -25,8 +27,8 @@ public class AuthController {
 
     // Register a User
     @PostMapping("/register")
-    public void createUser(@RequestBody Users user) {
-        userService.saveUser(user);
+    public ResponseEntity<String> createUser(@RequestBody Users user) {
+        return userService.saveUser(user)? new ResponseEntity<>("User Created Successfully",HttpStatus.OK) : new ResponseEntity<>("Username already used!",HttpStatus.CONFLICT);
     }
 
     // testing purpose endpoint
@@ -37,9 +39,10 @@ public class AuthController {
     }
 
     @PostMapping("/login")
-    public void verifyUser(@RequestBody Users user) {
-        userService.verifyUser(user);
+    public ResponseEntity<String> verifyUser(@RequestBody Users user) throws Exception {
+        String token = userService.verifyUser(user);
         System.out.println("login req");
+        return new ResponseEntity<>("Token: "+token, HttpStatus.OK);
     }
 
     @PutMapping("/users")
