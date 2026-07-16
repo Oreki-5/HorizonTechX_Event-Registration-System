@@ -1,0 +1,449 @@
+{
+  "info": {
+    "_postman_id": "c63ffed7-3f1b-4851-9411-654c79dc4629",
+    "name": "Event Registration System",
+    "description": "Second Task Given by HorizonTechX\n\nTASK 2: Event Registration System  \n• Set up backend using Django or Express.js to manage routes and logic.  \n• Create models for events and user registrations in your database.  \n• Build API endpoints to view event list, event details, and submit registration forms.  \n• Link registrations to users and events, and allow users to manage their registrations.  \n• Optional: Add admin panel or authentication for event organizers.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "52460174",
+    "_collection_link": "https://go.postman.co/collection/52460174-c63ffed7-3f1b-4851-9411-654c79dc4629?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "Authenitcation Related",
+      "item": [
+        {
+          "name": "User Registrarion",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"username\":\"oreki5\",\r\n    \"password\":\"password\",\r\n    \"role\":\"ROLE_ADMIN\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8080/auth/register",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "auth",
+                "register"
+              ]
+            },
+            "description": "Registers a New User.\n\nDefault Role is ROLE_USER ,if not provided.\n\nNo Duplicate username is allowed"
+          },
+          "response": []
+        },
+        {
+          "name": "User Login",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"username\": \"oreki5\",\r\n    \"password\": \"password\"\r\n\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8080/auth/login",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "auth",
+                "login"
+              ]
+            },
+            "description": "Verifyies the user credentials and provides a JWT token for authorization."
+          },
+          "response": []
+        }
+      ],
+      "description": "The Endpoints in this Collection can be accessed publicly."
+    },
+    {
+      "name": "Registration Related ( For user with Role : USER or ADMIN )",
+      "item": [
+        {
+          "name": "Get All Active Events",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/events",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "events"
+              ]
+            },
+            "description": "Return all events with status as \"Active\"."
+          },
+          "response": []
+        },
+        {
+          "name": "Register to an Event",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"userId\": 1,\r\n    \"eventId\": 1,\r\n    \"age\": 13,\r\n    \"location\": \"pune\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8080/registrations",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "registrations"
+              ]
+            },
+            "description": "Creates a new registration for a user for specified event\n\nDuplicate records are not allowed"
+          },
+          "response": []
+        },
+        {
+          "name": "Get All Registrations By User ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/registrations/users/2",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "registrations",
+                "users",
+                "2"
+              ]
+            },
+            "description": "Gets all the registrations created by a user.\n\nPath variable : user_id"
+          },
+          "response": []
+        },
+        {
+          "name": "Update a Registration",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"age\": 13,\r\n    \"eventId\": 1,\r\n    \"id\": 2,\r\n    \"location\": \"mumbai\",\r\n    \"userId\": 1\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8080/registrations",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "registrations"
+              ]
+            },
+            "description": "Updates an exisisting registration record."
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Registration",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/registrations/2",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "registrations",
+                "2"
+              ]
+            },
+            "description": "Deletes a registration record based on its ID."
+          },
+          "response": []
+        }
+      ],
+      "description": "The Endpoints in this Collection can be accessed by users with any role (i.e ROLE_USER or ROLE_ADMIN)"
+    },
+    {
+      "name": "Admin Related ( Only for user with Role : ADMIN )",
+      "item": [
+        {
+          "name": "Get all events created by a user",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/admin/events/users/1",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "admin",
+                "events",
+                "users",
+                "1"
+              ]
+            },
+            "description": "Returns all the events created by an Admin User."
+          },
+          "response": []
+        },
+        {
+          "name": "Create a new event",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"name\": \"Tennis Competition\",\r\n    \"description\": \"This is competition where you play Tennis and best one wins the price\",\r\n    \"status\": \"active\",\r\n    \"userId\": 1\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8080/admin/events",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "admin",
+                "events"
+              ]
+            },
+            "description": "Creates a new event record."
+          },
+          "response": []
+        },
+        {
+          "name": "Update an event",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"id\": 1,\r\n    \"name\": \"Origami Event\",\r\n    \"description\": \"This is an event where you create origami and share with others\",\r\n    \"status\": \"active\",\r\n    \"userId\": 1\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8080/admin/events",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "admin",
+                "events"
+              ]
+            },
+            "description": "Updates an existing event record."
+          },
+          "response": []
+        },
+        {
+          "name": "Get registrations for an event",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/admin/registrations/events/1",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "admin",
+                "registrations",
+                "events",
+                "1"
+              ]
+            },
+            "description": "Returns all the registration records present for a specified event_id."
+          },
+          "response": []
+        },
+        {
+          "name": "Delete an event",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/admin/events/2",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "admin",
+                "events",
+                "2"
+              ]
+            },
+            "description": "Soft Deletes an event record based on its ID. (Setting event to inactive)"
+          },
+          "response": []
+        },
+        {
+          "name": "Get all inactive events",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n        \"id\": 1,\r\n        \"name\": \"newtestttttttt\",\r\n        \"description\": \"updateudpateudpate\",\r\n        \"status\": \"active\",\r\n        \"userId\": 2\r\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8080/admin/events/inactive",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "admin",
+                "events",
+                "inactive"
+              ]
+            },
+            "description": "Returns all Inactive events."
+          },
+          "response": []
+        },
+        {
+          "name": "Restore a deleted event",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/admin/events/restore/2",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "admin",
+                "events",
+                "restore",
+                "2"
+              ]
+            },
+            "description": "Restores a soft deleted event based on its ID. (Sets event to active)"
+          },
+          "response": []
+        }
+      ],
+      "description": "The Endpoints in this Collection can only be accessed by users with role \"ROLE_ADMIN\".",
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {},
+            "exec": [
+              ""
+            ]
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {},
+            "exec": [
+              ""
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{token}}",
+        "type": "string"
+      }
+    ]
+  },
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [
+          ""
+        ]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [
+          ""
+        ]
+      }
+    }
+  ]
+}
