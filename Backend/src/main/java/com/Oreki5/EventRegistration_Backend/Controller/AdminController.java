@@ -35,7 +35,7 @@ public class AdminController {
     public ResponseEntity<String> createEvent(@RequestBody Events event) {
         return eventService.saveEvent(event)
                 ? new ResponseEntity<>("Event Created Successfully", HttpStatus.OK)
-                : new ResponseEntity<>("Bad Request", HttpStatus.BAD_REQUEST);
+                : new ResponseEntity<>("Event Name Already Exists, Try with a different name", HttpStatus.BAD_REQUEST);
     }
 
     // Get all the events created by a user

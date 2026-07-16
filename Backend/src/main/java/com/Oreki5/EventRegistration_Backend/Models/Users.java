@@ -2,8 +2,6 @@ package com.Oreki5.EventRegistration_Backend.Models;
 
 import java.util.Set;
 
-import org.hibernate.annotations.ColumnDefault;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -28,7 +26,7 @@ public class Users {
 
     @Column
     // @ColumnDefault("ROLE_USER")
-    private String role="ROLE_USER";
+    private String role = "ROLE_USER";
 
     @OneToMany(fetch = FetchType.EAGER)
     @JoinColumn(name = "userId", referencedColumnName = "id")
@@ -49,7 +47,7 @@ public class Users {
     }
 
     /*
-     * Learnt something here. The getters and setters need to have correct naming
+     * Learnt something new here. The getters and setters need to have correct naming
      * system. otherwise Repo interfaces wont map values to that column and set the
      * attribute value to null
      */

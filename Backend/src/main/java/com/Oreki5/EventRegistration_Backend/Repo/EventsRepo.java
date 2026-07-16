@@ -25,4 +25,6 @@ public interface EventsRepo extends JpaRepository<Events, Integer> {
     // Learnt how to use dynamic where clause in native query in @Query
     @Query(nativeQuery = true, value = "SELECT id,name,description,status FROM events e WHERE user_id = :uid")
     List<EventsResponse> findAllByUserId(@Param("uid") int id);
+
+    Events findByName(String name);
 }

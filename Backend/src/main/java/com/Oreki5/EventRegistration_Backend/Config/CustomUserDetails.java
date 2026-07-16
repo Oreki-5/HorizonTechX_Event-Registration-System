@@ -12,7 +12,7 @@ import com.Oreki5.EventRegistration_Backend.Models.Users;
 
 public class CustomUserDetails implements UserDetails {
 
-    private Users user;
+    private final Users user;
 
     public CustomUserDetails(Users user){
         this.user = user;

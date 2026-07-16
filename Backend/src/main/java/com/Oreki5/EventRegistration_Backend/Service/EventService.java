@@ -26,8 +26,19 @@ public class EventService {
     }
 
     public boolean saveEvent(Events event) {
-        eventsRepo.saveAndFlush(event);
-        return true;
+        if (event.getId() > 0) {
+            eventsRepo.saveAndFlush(event);
+            return true;
+        } else {
+            try {
+                eventsRepo.findByName(event.getName()).getName();
+                return false;
+
+            } catch (NullPointerException e) {
+                eventsRepo.saveAndFlush(event);
+                return true;
+            }
+        }
     }
 
     public List<EventsResponse> getByUser(int id) {

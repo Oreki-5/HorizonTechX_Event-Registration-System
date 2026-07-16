@@ -26,14 +26,19 @@ public class UserService {
 
     // Need to add duplicate username validation
     public boolean saveUser(Users user) {
-        try {
-            usersRepo.findByUsername(user.getUsername()).getUsername();
-            return false;
-
-        } catch (NullPointerException e) {
-            user.setPassword(encodePassword(user.getPassword()));
+        if (user.getId() > 0) {
             usersRepo.saveAndFlush(user);
             return true;
+        } else {
+            try {
+                usersRepo.findByUsername(user.getUsername()).getUsername();
+                return false;
+
+            } catch (NullPointerException e) {
+                user.setPassword(encodePassword(user.getPassword()));
+                usersRepo.saveAndFlush(user);
+                return true;
+            }
         }
 
     }

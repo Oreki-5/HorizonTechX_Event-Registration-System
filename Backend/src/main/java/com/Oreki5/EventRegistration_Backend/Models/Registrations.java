@@ -17,6 +17,25 @@ public class Registrations {
     @Column
     private int userId;
 
+    /*
+     * We can add more columns for gathering additional data from users. here adding
+     * just 2 sample data_fields
+     */
+
+    @Column
+    private String location;
+
+    @Column
+    private int age;
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+
     public int getId() {
         return id;
     }
@@ -39,5 +58,13 @@ public class Registrations {
 
     public void setUserId(int userId) {
         this.userId = userId;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
     }
 }

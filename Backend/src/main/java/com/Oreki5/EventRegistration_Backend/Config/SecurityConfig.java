@@ -32,7 +32,7 @@ public class SecurityConfig {
 
         http.csrf(e -> e.disable())
                 .authorizeHttpRequests(request -> {
-                    request.requestMatchers("/", "/auth/login", "/auth/register").permitAll();
+                    request.requestMatchers("/", "/auth/login", "/auth/register","/auth/users").permitAll();
                     request.requestMatchers("/registrations/**", "/events/**").hasAnyRole("USER", "ADMIN");
                     request.requestMatchers("/admin/**").hasRole("ADMIN");
                     request.anyRequest().authenticated();
